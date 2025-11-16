@@ -10,7 +10,7 @@
             max-width: 900px;
             margin: 300px auto;
             padding: 0 16px;
-            text-align: center; /* 중앙 정렬 */
+            text-align: center;
         }
 
         h1 {
