@@ -7,10 +7,21 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>수정 완료</title>
+</head>
+<body>
+
+<script>
+    const id = new URLSearchParams(location.search).get("id");
+
+    fetch(`https://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`, {
+        method: "DELETE"
+    })
+        .then(() => {
+            alert("수정 완료!");
+            location.href = "list.jsp";
+        });
+</script>
+</body>
 </html>
