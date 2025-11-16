@@ -32,8 +32,8 @@
                 <textarea id="detail" rows="10">${item.detail}</textarea>
 
                 <button onclick="location.href='edit_ok.jsp'">수정 완료</button>
+                <button onclick="location.href='list.jsp'">취소</button>
 
-                <a href="list.jsp" style="margin-left:10px;">취소</a>
             `;
         });
 

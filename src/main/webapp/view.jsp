@@ -54,8 +54,8 @@
 
             <div class="actions" style="margin-top:20px;">
                 <button onclick="location.href='list.jsp'">목록</button>
-                <button onclick="location.href='edit.jsp?id=${item.id}'">수정</button>
-                <button onclick="location.href='delete.jsp?id=${item.id}'">삭제</button>
+                <button onclick="location.href='edit.jsp?id=${item.id}'">수정</button>             
+                <button onclick="location.href='delete_ok.jsp?id=${item.id}'">삭제</button>
             </div>
 
             `;
