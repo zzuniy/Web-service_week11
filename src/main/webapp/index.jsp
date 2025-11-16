@@ -2,16 +2,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>JSP 게시판 시작 페이지</title>
+    <style>
+        body {
+
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 300px auto;
+            padding: 0 16px;
+            text-align: center; /* 중앙 정렬 */
+        }
+
+        h1 {
+            margin-bottom: 40px;
+        }
+
+        .btn {
+
+            display: inline-block;
+            padding: 12px 24px;
+            background-color:black;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-<h1><%= "Hello" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
-<form method = "get" action = "form_ok.jsp">
-    사용자 이름" <input type = "text" name = "username"><br>
-    <input type = "submit" value = "전송">
-</form>
+<h1>WELCOME TO THE<br>
+    ZZUNIY'S WORLD</h1>
+
+
+<a href="list.jsp" class="btn">입장하기</a>
 </body>
 </html>
