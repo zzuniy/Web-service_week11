@@ -1,16 +1,22 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: heojueun
-  Date: 25. 11. 16.
-  Time: 오후 3:02
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>등록 결과</title>
+</head>
+<body>
+<script>
+    const id = new URLSearchParams(location.search).get("id");
+
+    fetch(`https://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`, {
+        method: "DELETE"
+    })
+        .then(() => {
+            alert("등록 완료!");
+            location.href = "list.jsp";
+        });
+</script>
+</body>
 </html>
