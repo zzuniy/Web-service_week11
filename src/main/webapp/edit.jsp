@@ -18,7 +18,7 @@
     const id = new URLSearchParams(location.search).get("id");
 
     // 기존 데이터 가져오기
-    fetch(`https://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`)
+    fetch(`http://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`)
         .then(res => res.json())
         .then(item => {
             document.getElementById('box').innerHTML = `
