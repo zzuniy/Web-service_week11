@@ -41,8 +41,8 @@
 <ul id="list"></ul>
 
 <script>
-    fetch('https://68db331c23ebc87faa323bc7.mockapi.io/employee')
-        .then(response => response.json())
+    fetch('http://68db331c23ebc87faa323bc7.mockapi.io/employee')
+            .then(response => response.json())
         .then(data => {
             const list = document.getElementById('list');
             const status = document.getElementById('status');
