@@ -42,7 +42,7 @@
 <script>
     const id = new URLSearchParams(location.search).get("id");
 
-    fetch(`https://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`)
+    fetch(`http://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`)
         .then(res => res.json())
         .then(item => {
             const created = new Date(item.createdAt).toLocaleString();
