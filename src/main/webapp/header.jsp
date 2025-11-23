@@ -3,7 +3,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-    /* 헤더 고정 */
+
     header.navbar {
         position: fixed;
         top: 0;
@@ -12,8 +12,8 @@
         z-index: 1000;
     }
     body {
-        padding-top: 70px; /* header 높이만큼 여백 */
-        padding-bottom: 50px; /* footer 높이만큼 여백 */
+        padding-top: 70px;
+        padding-bottom: 50px;
     }
 </style>
 
