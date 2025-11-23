@@ -1,4 +1,4 @@
-package org.example._1week_jsp;
+package file;
 
 public class BoardVO {
     private int id;
