@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="true" %>
+<%@ include file="header.jsp" %>
+
 <html>
 <head>
     <title>게시물 수정</title>
@@ -18,7 +19,7 @@
     const id = new URLSearchParams(location.search).get("id");
 
     // 기존 데이터 가져오기
-    fetch(`http://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`)
+    fetch(`https://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`)
         .then(res => res.json())
         .then(item => {
             document.getElementById('box').innerHTML = `
@@ -42,3 +43,4 @@
 
 </body>
 </html>
+<%@ include file="footer.jsp" %>

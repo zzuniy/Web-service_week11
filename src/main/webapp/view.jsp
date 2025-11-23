@@ -1,4 +1,14 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="true" %>
+<%@ include file="header.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="file.BoardDao" %>
+<%@ page import="file.BoardVO" %>
+
+<%
+    int id = Integer.parseInt(request.getParameter("id"));
+    BoardDao dao = new BoardDao();
+    BoardVO vo = dao.getBoard(id);
+%>
+
 <html>
 <head>
     <title>게시물 상세보기</title>
@@ -35,32 +45,21 @@
     </style>
 </head>
 <body>
+<h2><%= vo.getTitle() %></h2>
+<div class="meta">
+    작성자: <%= vo.getName() %> | 작성일: <%= vo.getCreatedAt() %>
+</div>
+<div class="content"><%= vo.getDetail() %></div>
+
+<div class="actions" style="margin-top:20px;">
+    <button onclick="location.href='list.jsp'">목록</button>
+    <button onclick="location.href='edit.jsp?id=<%= vo.getId() %>'">수정</button>
+    <button onclick="location.href='delete_ok.jsp?id=<%= vo.getId() %>'">삭제</button>
+</div>
 
 
-<div id="box">로딩 중...</div>
-
-<script>
-    const id = new URLSearchParams(location.search).get("id");
-
-    fetch(`http://68db331c23ebc87faa323bc7.mockapi.io/employee/${id}`)
-        .then(res => res.json())
-        .then(item => {
-            const created = new Date(item.createdAt).toLocaleString();
-
-            document.getElementById('box').innerHTML = `
-                <h2>${item.title}</h2>
-                <div class="meta">작성자: ${item.name} | 작성일: ${created}</div>
-                <div class="content">${item.detail}</div>
-
-            <div class="actions" style="margin-top:20px;">
-                <button onclick="location.href='list.jsp'">목록</button>
-                <button onclick="location.href='edit.jsp?id=${item.id}'">수정</button>             
-                <button onclick="location.href='delete_ok.jsp?id=${item.id}'">삭제</button>
-            </div>
-
-            `;
-        });
-</script>
 
 </body>
 </html>
+
+<%@ include file="footer.jsp" %>

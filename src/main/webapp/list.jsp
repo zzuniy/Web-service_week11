@@ -1,83 +1,75 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="true" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="file.BoardDao" %>
+<%@ page import="file.BoardVO" %>
+<%@ page import="java.util.List" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<html>
-<head>
-    <title>게시물 목록</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width:900px; margin:20px auto; padding:0 16px; }
-        ul#list { list-style:none; padding:0; margin:0; }
-        ul#list li { padding:12px; border-bottom:1px solid #eee; }
-        ul#list li a { font-weight:600; color:#333; text-decoration:none; }
-        ul#list li .meta { color:#666; font-size:0.9em; margin-top:6px; }
-        #status { color:#666; margin-bottom:12px; }
+<jsp:include page="header.jsp" />
 
-        .top-actions .btn {
+<%
+    String keyword = request.getParameter("keyword");
+    String type = request.getParameter("type");
 
-            display: inline-block;
-            padding: 8px 16px;
-            margin-left: 800px;
-            background-color: black;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
+    BoardDao dao = new BoardDao();
+    List<BoardVO> list;
 
-            transition: background-color 0.3s;
-        }
+    if(keyword != null && !keyword.trim().isEmpty()){
+        list = dao.search(type, keyword);
+    } else {
+        list = dao.getList();
+    }
 
-        .top-actions .btn:hover {
-            background-color: #45a049; /* 마우스 오버 시 색 살짝 변함 */
-        }
+    request.setAttribute("list", list);
+%>
 
-    </style>
-</head>
-<body>
-<h1>ZZUNIY'S WORLD</h1>
-<div class="top-actions">
-    <a href="write.jsp" class="btn">글쓰기</a>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">ZZUNIY'S WORLD</h1>
+
+    <!-- 검색 폼 -->
+    <form method="get" action="list.jsp" class="d-flex mb-3">
+        <input type="text" name="keyword" class="form-control me-2" placeholder="검색어 입력" value="${param.keyword}">
+        <select name="type" class="form-select me-2">
+            <option value="title" ${param.type == 'title' ? 'selected' : ''}>제목</option>
+            <option value="name" ${param.type == 'name' ? 'selected' : ''}>작성자</option>
+            <option value="detail" ${param.type == 'detail' ? 'selected' : ''}>내용</option>
+        </select>
+        <button type="submit" class="btn btn-primary">검색</button>
+        <a href="write.jsp" class="btn btn-dark ms-2">글쓰기</a>
+    </form>
+
+    <!-- 게시물 목록 -->
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
+            <th>액션</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="vo" items="${list}">
+            <tr>
+                <td>${vo.id}</td>
+                <td><a href="view.jsp?id=${vo.id}">${vo.title}</a></td>
+                <td>${vo.name}</td>
+                <td>${vo.createdAt}</td>
+                <td>${vo.cnt}</td>
+                <td>
+                    <a href="edit.jsp?id=${vo.id}" class="btn btn-sm btn-warning">수정</a>
+                    <a href="delete_ok.jsp?id=${vo.id}" class="btn btn-sm btn-danger">삭제</a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+    <c:if test="${fn:length(list) == 0}">
+        <p class="text-center text-muted">검색 결과가 없습니다.</p>
+    </c:if>
 </div>
 
-
-<div id="status">로딩 중...</div>
-<ul id="list"></ul>
-
-<script>
-    fetch('http://68db331c23ebc87faa323bc7.mockapi.io/employee')
-            .then(response => response.json())
-        .then(data => {
-            const list = document.getElementById('list');
-            const status = document.getElementById('status');
-            status.style.display = 'none';
-
-            data.forEach(item => {
-                const li = document.createElement('li');
-
-                let createdDate = '';
-                if(item.createdAt) {
-                    const d = new Date(item.createdAt);
-                    createdDate = d.toLocaleString();
-                }
-
-                li.innerHTML = `
-                    <a href="view.jsp?id=${item.id}" class="title">${item.title}</a>
-
-                    <div class="meta">
-                        작성자: ${item.name} | 작성일: ${createdDate}
-                    </div>
-
-                    <div class="preview">
-                        ${item.detail ? item.detail.substring(0, 100) : ''}...
-                    </div>
-
-
-                `;
-                list.appendChild(li);
-                console.log('script 실행됨');
-            });
-        })
-        .catch(err => {
-            document.getElementById('status').innerText = '데이터 로딩 실패';
-            console.error(err);
-        });
-</script>
-</body>
-</html>
+<jsp:include page="footer.jsp" />

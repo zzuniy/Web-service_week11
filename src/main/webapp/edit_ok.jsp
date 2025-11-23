@@ -1,4 +1,5 @@
-<%--
+
+<%@ include file="header.jsp" %><%--
   Created by IntelliJ IDEA.
   User: heojueun
   Date: 25. 11. 16.
@@ -25,3 +26,4 @@
 </script>
 </body>
 </html>
+
