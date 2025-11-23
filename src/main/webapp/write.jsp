@@ -1,4 +1,11 @@
+<%@ include file="header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="file.BoardDao" %>
+<%@ page import="file.BoardVO" %>
+<%
+    request.setCharacterEncoding("UTF-8");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,12 +59,13 @@
     <input type="text" name="title" required>
 
     <label>작성자:</label>
-    <input type="text" name="writer" required>
+    <input type="text" name="name" required>
 
     <label>내용:</label>
-    <textarea name="content" rows="5" required></textarea>
+    <textarea name="detail" rows="5" required></textarea>
 
     <input type="submit" value="등록">
 </form>
 </body>
 </html>
+<%@ include file="footer.jsp" %>
